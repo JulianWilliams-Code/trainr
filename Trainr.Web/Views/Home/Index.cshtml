@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Booked Sessions By Trainer and Sport Type";
+}
+
+<h3 class="align-content-center">@ViewData["Title"]</h3>
+
+<div class="row" id="entirePage">
+    <div style="float:left; height:200px; width:50%">
+        <label class="label label-success">Session By Trainer</label>
+        <div id="chartForAllTrainers"></div>
+    </div>
+    <div style="float:right; height:200px; width:50%">
+        <label>Booked Sessions By Trainer and Sport Type</label>
+        <select asp-items="ViewBag.TrainerList" id="trainerFullNameSelected">
+            <option>None</option>
+        </select>
+        <div id="chartForOneTrainer"></div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css" rel="stylesheet" />
+
+<script src="~/js/DisplayBookedSessionsDataForAllTrainers.js" type="text/javascript"></script>
+
+<script src="~/js/DisplayBookedSessionsDataForOneTrainer.js" type="text/javascript"></script>

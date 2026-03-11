@@ -1,0 +1,121 @@
+﻿@model SearchTrainersViewModel
+@{
+    ViewData["Title"] = "Search Trainers";
+}
+
+<h1>Search Trainers</h1>
+
+<form asp-controller="TrainerSchedule" asp-action="SearchTrainers" method="post">
+    <div class="form-group">
+        <label>Sports Type</label>
+        <select asp-for="SportType" class="form-control">
+            <option value="">None</option>
+            <option value="Basketball">Basketball</option>
+            <option value="Soccer">Soccer</option>
+            <option value="Football">Football</option>
+
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Start Date & Time</label>
+        <input asp-for="StartDateTime" class="form-control"/>
+    </div>
+
+    <div>
+        <label>End Date & Time</label>
+        <input  asp-for="EndDateTime" class="form-control"/>
+    </div>
+
+    <button type="submit" class="btn-primary">Search</button>
+
+</form>
+@if (Model.trainerScheduleList != null)
+{
+    <table class="table table-bordered table-striped">
+
+        <thead>
+            <tr>
+                <th>Trainer</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th> Schedule Start Date and Time </th>
+                <th> Schedule End Date and Time </th>
+                <th>Available</th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th>Choose Trainer to Modify</th>
+                    <th>Choose Trainer Schedule to Modify</th>
+                    <th>Choose Trainer to Remove</th>
+                    <th>Choose Trainer Schedule to Remove</th>
+
+
+                }
+                @if (User.IsInRole("Athlete"))
+                {
+                    <th>Book Training Session</th>
+                }
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (TrainerSchedule eachTrainerSchedule in Model.trainerScheduleList)
+            {
+            <tr>
+                <td>
+                    @eachTrainerSchedule.trainer.fullName
+                </td>
+                <td>@eachTrainerSchedule.trainer.Email</td>
+                <td>@eachTrainerSchedule.trainer.PhoneNumber</td>
+                <td>@eachTrainerSchedule.trainerScheduleStartDateTime</td>
+                <td>@eachTrainerSchedule.trainerScheduleEndDateTime</td>
+                
+                <td>@eachTrainerSchedule.isAvailable</td>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+
+                    if (User.IsInRole("Admin"))
+                    {
+                        <td>
+
+                            <a class="btn-btn-primary" asp-controller="TrainerSchedule" asp-action="EditTrainer" asp-route-trainerID="@eachTrainerSchedule.trainerId">Edit Trainer</a>
+
+                        </td>
+
+                        <td>
+
+                            <a class="btn-btn-primary" asp-controller="TrainerSchedule" asp-action="EditTrainerSchedule" asp-route-TrainerScheduleID="@eachTrainerSchedule.trainerScheduleID">Edit Trainer Schedule</a>
+
+                        </td>
+
+                        <td>
+
+                            <a class="btn-btn-primary" asp-controller="TrainerSchedule" asp-action="ConfirmDeleteTrainers" asp-route-trainerID="@eachTrainerSchedule.trainerId">Delete Trainer</a>
+
+                        </td>
+
+                        <td>
+
+                            <a class="btn-btn-primary" asp-controller="TrainerSchedule" asp-action="ConfirmDeleteTrainersSchedule" asp-route-TrainerScheduleID="@eachTrainerSchedule.trainerScheduleID">Delete Trainer Schedule</a>
+
+                        </td>
+                    }
+                    if (User.IsInRole("Athlete"))
+                    {
+                        <td>
+
+                            <a class="btn-btn-primary" asp-controller="TrainingSession" asp-action="BookTrainingSession" asp-route-trainerScheduleID="@eachTrainerSchedule.trainerScheduleID">Book Training Session</a>
+
+                        </td>
+                    }
+
+                }
+
+            </tr>
+            }
+
+        </tbody>
+    </table>
+}

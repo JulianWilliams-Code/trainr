@@ -1,0 +1,113 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>aspnet-Trainr.Web-4C0225E2-CDAE-4F09-B31D-C2F8754DA3EC</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20191118023901_Addedusers.cs" />
+    <Compile Remove="Data\Migrations\20191118023901_Addedusers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118023936_Addedathletes.cs" />
+    <Compile Remove="Data\Migrations\20191118023936_Addedathletes.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118033538_Addedusers.cs" />
+    <Compile Remove="Data\Migrations\20191118033538_Addedusers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118033558_Addedathletes.cs" />
+    <Compile Remove="Data\Migrations\20191118033558_Addedathletes.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118041907_Addedathletes.cs" />
+    <Compile Remove="Data\Migrations\20191118041907_Addedathletes.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118041954_Addedusers.cs" />
+    <Compile Remove="Data\Migrations\20191118041954_Addedusers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118150653_inheritance.cs" />
+    <Compile Remove="Data\Migrations\20191118150653_inheritance.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118151139_Addedathletes.cs" />
+    <Compile Remove="Data\Migrations\20191118151139_Addedathletes.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118172723_AddedSessions.cs" />
+    <Compile Remove="Data\Migrations\20191118172723_AddedSessions.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118173451_Addedsessions.cs" />
+    <Compile Remove="Data\Migrations\20191118173451_Addedsessions.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118201339_inheritance.cs" />
+    <Compile Remove="Data\Migrations\20191118201339_inheritance.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118201651_inheritance.cs" />
+    <Compile Remove="Data\Migrations\20191118201651_inheritance.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191118203649_AddedAthletes.cs" />
+    <Compile Remove="Data\Migrations\20191118203649_AddedAthletes.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191120023720_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191120023720_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191120024839_AddedSessions.cs" />
+    <Compile Remove="Data\Migrations\20191120024839_AddedSessions.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191120035411_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191120035411_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191120035510_AddedSessions.cs" />
+    <Compile Remove="Data\Migrations\20191120035510_AddedSessions.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191120043506_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191120043506_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191120044148_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191120044148_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191120044455_AddedAthletes.cs" />
+    <Compile Remove="Data\Migrations\20191120044455_AddedAthletes.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191120044815_AddedSessions.cs" />
+    <Compile Remove="Data\Migrations\20191120044815_AddedSessions.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191120051626_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191120051626_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191121183004_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191121183004_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191121183313_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191121183313_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191123161049_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191123161049_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191129011656_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191129011656_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191211173936_AddedTrainingSchedules.cs" />
+    <Compile Remove="Data\Migrations\20191211173936_AddedTrainingSchedules.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191211174428_AddedTrainingSchedules.cs" />
+    <Compile Remove="Data\Migrations\20191211174428_AddedTrainingSchedules.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191211191311_AddedTrainingSchedules.cs" />
+    <Compile Remove="Data\Migrations\20191211191311_AddedTrainingSchedules.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191217041712_UpdatedTriner.cs" />
+    <Compile Remove="Data\Migrations\20191217041712_UpdatedTriner.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191217050405_UpdatedChildClass.cs" />
+    <Compile Remove="Data\Migrations\20191217050405_UpdatedChildClass.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191223164311_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191223164311_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191223164417_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191223164417_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20191225194947_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20191225194947_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200307183133_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20200307183133_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200314153640_AddedTrainingSession.cs" />
+    <Compile Remove="Data\Migrations\20200314153640_AddedTrainingSession.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200314170407_AddedTrainerSchedules.cs" />
+    <Compile Remove="Data\Migrations\20200314170407_AddedTrainerSchedules.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200314170428_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20200314170428_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200314170524_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20200314170524_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200408072105_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20200408072105_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200417162332_AddedApplicationUsers.cs" />
+    <Compile Remove="Data\Migrations\20200417162332_AddedApplicationUsers.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200424194757_NewChanges.cs" />
+    <Compile Remove="Data\Migrations\20200424194757_NewChanges.Designer.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+    <PackageReference Include="MimeKit" Version="2.6.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+</Project>

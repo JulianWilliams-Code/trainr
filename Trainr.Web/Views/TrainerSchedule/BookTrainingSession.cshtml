@@ -1,0 +1,22 @@
+﻿@*@model TrainingSession
+@{ ViewData["Title"] = "Book Training Session"; }
+
+<h4>Book Training Session</h4>
+
+<form asp-controller="TrainerSchedule" asp-action="BookTrainingSession" method="post">
+
+    <div class="form-group">
+
+        <label>Training Session Date Time</label>
+
+        <input asp-for="trainingSessionDate" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Book Training Session</button>
+
+    @if (ViewBag.ErrorMessage != "None")
+    {
+        <p>@ViewBag.ErrorMessage</p>
+    }
+
+</form>*@ 

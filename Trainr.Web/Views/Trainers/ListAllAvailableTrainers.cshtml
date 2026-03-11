@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Trainer>
+
+@{
+    ViewData["Title"] = "All Trainers";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table table-bordered table-striped">
+
+    <thead>
+        <tr>
+            <th>Trainer</th>
+            <th>Sport Type</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Start Time of Availability</th>
+            <th>End Time of  Availability</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (Trainer eachTrainer in Model)
+        {
+        <tr>
+            <td>@eachTrainer.fullName</td>
+            <td>@eachTrainer.sportType</td>
+            <td>@eachTrainer.Email</td>
+            <td>@eachTrainer.PhoneNumber</td>
+            <td>
+                @foreach (TrainerSchedule eachTrainerSchedule in eachTrainer.trainerSchedules)
+                {
+                    @eachTrainerSchedule.trainerScheduleStartDateTime
+                }
+            </td>
+            <td>
+                @foreach (TrainerSchedule eachTrainerSchedule in eachTrainer.trainerSchedules)
+                {
+                    @eachTrainerSchedule.trainerScheduleEndDateTime
+                }
+            </td>
+        </tr>
+        }
+
+    </tbody>
+
+
+</table>

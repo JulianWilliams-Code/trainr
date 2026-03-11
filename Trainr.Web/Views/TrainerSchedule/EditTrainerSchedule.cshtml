@@ -1,0 +1,34 @@
+﻿@model TrainerSchedule
+@{
+    ViewData["Title"] = "Edit Trainer Schedule";
+}
+
+<h1>Edit Trainer Schedule</h1>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+@{ 
+    // Warning label
+}
+
+<form asp-controller="TrainerSchedule" asp-action="EditTrainerSchedule" method="post">
+
+    @Html.HiddenFor(m => m.trainerId)
+
+    <div class="form-group">
+        <label>Trainer:</label>
+        <input asp-for="trainerId" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Schedule Start Date and Time</label>
+        <input asp-for="trainerScheduleStartDateTime" class="form-control" />
+
+    </div>
+    <div class="form-group">
+        <label>Schedule End Date and Time</label>
+        <input asp-for="trainerScheduleEndDateTime" class="form-control" />
+
+    </div>
+
+
+    <button type="submit" class="btn-primary">Edit Trainer</button>
+</form>
