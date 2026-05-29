@@ -1,0 +1,46 @@
+## .NET / C#
+obj/
+bin/
+*.user
+*.suo
+.vs/
+*.userprefs
+*.pidb
+*.booproj
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## EF Core
+*.db
+*.db-shm
+*.db-wal
+
+## Rider / JetBrains
+.idea/
+
+## VSCode
+.vscode/
+
+## macOS
+.DS_Store
+
+## NuGet
+*.nupkg
+**/[Pp]ackages/
+!**/[Pp]ackages/build/
+
+## Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+## Secrets - NEVER commit these
+appsettings.Production.json
+*secrets*.json
