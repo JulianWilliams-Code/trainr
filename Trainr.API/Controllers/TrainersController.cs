@@ -24,6 +24,21 @@ public class TrainersController : ControllerBase
         _userManager = userManager;
     }
 
+    // GET /api/trainers/me  (trainer views their own full profile)
+    [Authorize(Roles = "Trainer")]
+    [HttpGet("me")]
+    public async Task<ActionResult<ApiResponse<TrainerProfileDto>>> GetMyProfile()
+    {
+        var userId  = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+        var profile = await _db.TrainerProfiles.FirstOrDefaultAsync(t => t.UserId == userId);
+
+        if (profile is null)
+            return NotFound(ApiResponse<TrainerProfileDto>.Fail("Trainer profile not found."));
+
+        var user = await _userManager.FindByIdAsync(userId);
+        return Ok(ApiResponse<TrainerProfileDto>.Ok(MapToDto(profile, user)));
+    }
+
     // GET /api/trainers?sportType=Soccer&city=Austin&page=1&pageSize=20
     [HttpGet]
     public async Task<ActionResult<ApiResponse<PagedResult<TrainerProfileDto>>>> Search(
@@ -97,18 +112,25 @@ public class TrainersController : ControllerBase
         if (profile is null)
             return NotFound(ApiResponse<TrainerProfileDto>.Fail("Profile not found."));
 
-        if (request.Bio                 is not null) profile.Bio                 = request.Bio;
-        if (request.SportType           is not null) profile.SportType           = request.SportType;
-        if (request.HourlyRate          is not null) profile.HourlyRate          = request.HourlyRate.Value;
-        if (request.City                is not null) profile.City                = request.City;
-        if (request.State               is not null) profile.State               = request.State;
-        if (request.ProfileImageUrl     is not null) profile.ProfileImageUrl     = request.ProfileImageUrl;
+        if (request.Bio                  is not null) profile.Bio                  = request.Bio;
+        if (request.SportType            is not null) profile.SportType            = request.SportType;
+        if (request.HourlyRate           is not null) profile.HourlyRate           = request.HourlyRate.Value;
+        if (request.City                 is not null) profile.City                 = request.City;
+        if (request.State                is not null) profile.State                = request.State;
+        if (request.ProfileImageUrl      is not null) profile.ProfileImageUrl      = request.ProfileImageUrl;
         if (request.CertificationDetails is not null) profile.CertificationDetails = request.CertificationDetails;
-        if (request.YearsOfExperience   is not null) profile.YearsOfExperience  = request.YearsOfExperience.Value;
+        if (request.YearsOfExperience    is not null) profile.YearsOfExperience   = request.YearsOfExperience.Value;
 
         await _db.SaveChangesAsync();
 
         var user = await _userManager.FindByIdAsync(userId);
+        if (user is not null)
+        {
+            if (request.FirstName is not null) user.FirstName = request.FirstName;
+            if (request.LastName  is not null) user.LastName  = request.LastName;
+            await _userManager.UpdateAsync(user);
+        }
+
         return Ok(ApiResponse<TrainerProfileDto>.Ok(MapToDto(profile, user), "Profile updated."));
     }
 
