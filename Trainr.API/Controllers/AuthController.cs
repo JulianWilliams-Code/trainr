@@ -1,5 +1,8 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Trainr.Application.Auth.DTOs;
 using Trainr.Application.Common;
 using Trainr.Application.Common.Interfaces;
@@ -12,6 +15,7 @@ namespace Trainr.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[EnableRateLimiting("auth")]
 public class AuthController : ControllerBase
 {
     private readonly UserManager<ApplicationUser> _userManager;
@@ -110,5 +114,58 @@ public class AuthController : ControllerBase
             Role      = role,
             ExpiresAt = DateTime.UtcNow.AddDays(7)
         }));
+    }
+
+    // POST /api/auth/change-password  (must be logged in)
+    [Authorize]
+    [HttpPost("change-password")]
+    public async Task<ActionResult<ApiResponse<object>>> ChangePassword(ChangePasswordRequest request)
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier)!;
+        var user   = await _userManager.FindByIdAsync(userId);
+
+        if (user is null)
+            return NotFound(ApiResponse<object>.Fail("User not found."));
+
+        var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+        if (!result.Succeeded)
+            return BadRequest(ApiResponse<object>.Fail("Password change failed.",
+                result.Errors.Select(e => e.Description)));
+
+        return Ok(ApiResponse<object>.Ok(new { }, "Password changed successfully."));
+    }
+
+    // POST /api/auth/forgot-password  (public — returns reset token in dev; email it in prod)
+    [HttpPost("forgot-password")]
+    public async Task<ActionResult<ApiResponse<object>>> ForgotPassword(ForgotPasswordRequest request)
+    {
+        var user = await _userManager.FindByEmailAsync(request.Email);
+
+        // Always return 200 — don't reveal whether the email exists
+        if (user is null || !user.IsActive)
+            return Ok(ApiResponse<object>.Ok(new { },
+                "If that email is registered, a reset token has been issued."));
+
+        var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+        // TODO: in production, email this token instead of returning it.
+        // For now, return it directly so you can test without an email service.
+        return Ok(ApiResponse<object>.Ok(new { token }, "Use this token with /reset-password."));
+    }
+
+    // POST /api/auth/reset-password
+    [HttpPost("reset-password")]
+    public async Task<ActionResult<ApiResponse<object>>> ResetPassword(ResetPasswordRequest request)
+    {
+        var user = await _userManager.FindByEmailAsync(request.Email);
+        if (user is null || !user.IsActive)
+            return BadRequest(ApiResponse<object>.Fail("Invalid request."));
+
+        var result = await _userManager.ResetPasswordAsync(user, request.Token, request.NewPassword);
+        if (!result.Succeeded)
+            return BadRequest(ApiResponse<object>.Fail("Password reset failed.",
+                result.Errors.Select(e => e.Description)));
+
+        return Ok(ApiResponse<object>.Ok(new { }, "Password reset successfully. Please log in."));
     }
 }
